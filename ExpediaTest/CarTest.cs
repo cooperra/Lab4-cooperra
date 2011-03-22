@@ -50,5 +50,24 @@ namespace ExpediaTest
 		{
 			new Car(-5);
 		}
+
+        [Test()]
+        public void TestThatCarDoesGetMileageFromDatabase()
+        {
+            IDatabase mockDatabase = mocks.Stub<IDatabase>();
+            mockDatabase.Miles = 9001;
+
+            var target = new Car(5);
+            target.Database = mockDatabase;
+
+            Assert.AreEqual(9001, target.Mileage);
+        }
+
+        [Test()]
+        public void TestThatCarHasCorrectBasePriceForTenDays_ObjectMotherStyle()
+        {
+            var target = ObjectMother.BMW(); //Car(21)
+            Assert.AreEqual(168, target.getBasePrice());
+        }
 	}
 }
